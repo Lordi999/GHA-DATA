@@ -28,6 +28,7 @@ jobs:
                 echo "cluster=int" >> $GITHUB_OUTPUT
               else
                 echo "cluster=prod" >> $GITHUB_OUTPUT
+              fi
 
   OutputCluster:
     needs: GetCluster
