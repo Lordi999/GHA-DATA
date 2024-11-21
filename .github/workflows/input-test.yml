@@ -1,0 +1,40 @@
+name: Deploy X Service
+on:
+  workflow_dispatch:
+    inputs:
+      stream:
+        type: choice
+        description: Select the stream
+        required: true
+        options:
+          - dev2
+          - dev1
+          - int2
+          - int1
+          - prod
+
+jobs:
+  GetCluster:
+    runs-on: ubuntu-latest
+    outputs:
+      cluster: ${{ steps.determine.outputs.cluster }}
+    steps:
+      - name: Determine Cluster
+        id: determine
+        run: |
+              if [ ${{ inputs.stream }} = 'dev1' ] | [ ${{ inputs.stream }} = 'dev2' ]; then
+                echo "cluster=dev" >> $GITHUB_OUTPUT
+              elif [ ${{ inputs.stream }} = 'int1' ] | [ ${{ inputs.stream }} = 'int2' ]; then
+                echo "cluster=int" >> $GITHUB_OUTPUT
+              else
+                echo "cluster=prod" >> $GITHUB_OUTPUT
+
+  OutputCluster:
+    needs: GetCluster
+    runs-on: ubuntu-latest
+    steps:
+        - name: Output Stream
+          run: echo ${{ inputs.stream }}
+        - name: Output Cluster
+          run: echo ${{ needs.GetCluster.outputs.cluster }}
+     
