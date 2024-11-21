@@ -24,7 +24,7 @@ jobs:
         run: |
               if [[ "${{ inputs.stream }}" = "dev1" || "${{ inputs.stream }}" = "dev2" ]]; then
                 echo "cluster=dev" >> "$GITHUB_OUTPUT"
-              elseif [[ "${{ inputs.stream }}" = "int1" || "${{ inputs.stream }}" = "int2" ]] then
+              elseif [[ "${{ inputs.stream }}" = "int1" || "${{ inputs.stream }}" = "int2" ]]; then
                 echo "cluster=int" >> "$GITHUB_OUTPUT"
               fi
 
