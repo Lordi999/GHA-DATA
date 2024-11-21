@@ -22,8 +22,11 @@ jobs:
       - name: Determine Cluster
         id: determine
         run: |
-              echo "cluster=dev" >> "$GITHUB_OUTPUT"
-             
+              if [[ "${{ inputs.stream }}" = "dev1" || "${{ inputs.stream }}" = "dev2" ]]; then
+                echo "cluster=dev" >> "$GITHUB_OUTPUT"
+              else
+                echo "cluster=KP" >> "$GITHUB_OUTPUT"
+              fi             
 
   OutputCluster:
     needs: GetCluster
