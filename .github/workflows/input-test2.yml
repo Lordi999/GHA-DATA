@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: Run custom Action
         id: runJS
-        uses: Lordi999/GHA-E9/.github/actions/determineCluster
+        uses: Lordi999/GHA-E9/.github/actions/determineCluster@main
         with:
           environment: ${{ inputs.stream }}
           clusters: 'dev, int, prod'
