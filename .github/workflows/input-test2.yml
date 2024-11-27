@@ -1,0 +1,29 @@
+name: Test Inputs with Custom Action
+on:
+  workflow_dispatch:
+    inputs:
+      stream:
+        type: choice
+        description: Select the stream
+        required: true
+        options:
+          - dev2
+          - dev1
+          - int2
+          - int1
+          - prod
+          - test1
+          - test2
+
+jobs:
+  GetCluster:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run custom Action
+        id: runJS
+        uses: Lordi999/GHA-E9/.github/actions/determineCluster
+        with:
+          environment: ${{ inputs.stream }}
+          clusters: 'dev, int, prod'
+      - name: Output Result
+        run: echo ${{ steps.runJS.outputs.cluster }}
