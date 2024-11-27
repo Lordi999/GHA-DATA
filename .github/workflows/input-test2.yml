@@ -33,7 +33,7 @@ jobs:
   OutputCluster:
     needs: DetermineCluster
     runs-on: ubuntu-latest
-    if: ${{ needs.DetermineCluster.outputs.cluster }} != 'Unknown'
+    if: ${{ needs.DetermineCluster.outputs.cluster }} != Unknown
     steps:
       - name: Output Result
         run: echo ${{ needs.DetermineCluster.outputs.cluster }}
