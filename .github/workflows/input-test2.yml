@@ -28,7 +28,7 @@ jobs:
           environment: ${{ inputs.stream }}
       - name: Set Output
         id: setOutput
-        run: "result=${{ steps.determineCluster.outputs.cluster }}" >> "$GITHUB_OUTPUT"
+        run: echo "result=${{ steps.determineCluster.outputs.cluster }}" >>  "$GITHUB_OUTPUT"
       
   OutputCluster:
     needs: DetermineCluster
