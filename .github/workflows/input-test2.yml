@@ -19,7 +19,7 @@ jobs:
   DetermineCluster:
     runs-on: ubuntu-latest
     outputs:
-      cluster: ${{ steps.publish.outputs.result }}
+      cluster: ${{ steps.setOutput.outputs.result }}
     steps:
       - name: Determine Cluster
         id: determineCluster
