@@ -16,13 +16,23 @@ on:
           - test2
 
 jobs:
-  GetCluster:
+  DetermineCluster:
     runs-on: ubuntu-latest
+    outputs:
+      cluster: ${{ steps.publish.outputs.result }}
     steps:
-      - name: Run custom Action
-        id: runJS
+      - name: Determine Cluster
+        id: determineCluster
         uses: Lordi999/GHA-E9/.github/actions/determineCluster@main
         with:
           environment: ${{ inputs.stream }}
+      - name: Set Output
+        id: setOutput
+        run: "result=${{ steps.determineCluster.outputs.cluster }}" >> "$GITHUB_OUTPUT"
+      
+  OutputCluster:
+    needs: DetermineCluster
+    runs-on: ubuntu-latest
+    steps:
       - name: Output Result
-        run: echo ${{ steps.runJS.outputs.cluster }}
+        run: echo ${{ needs.DetermineCluster.outputs.cluster }}
