@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Determine Cluster
         id: determineCluster
-        uses: Lordi999/GHA-E9/.github/actions/determineCluster@main
+        uses: Lordi999/GHA-E9/.github/actions/determineClusterComp@main
         with:
           environment: ${{ inputs.stream }}
       - name: Set Output
